@@ -1,0 +1,22 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.15.7",
+  "resource_changes": [
+    {
+      "address": "azurerm_resource_group.bad",
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "bad",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": { "actions": ["create"], "before": null, "after": { "name": "myresourcegroup", "location": "uksouth" } }
+    },
+    {
+      "address": "azurerm_resource_group.good",
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "good",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": { "actions": ["create"], "before": null, "after": { "name": "rg-ldo-uks-prd", "location": "uksouth" } }
+    }
+  ]
+}

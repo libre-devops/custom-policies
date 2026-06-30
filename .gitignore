@@ -1,0 +1,6 @@
+# Local Terraform plan artifacts used for ad-hoc policy runs
+*.bin
+plan.json
+.terraform/
+.terraform.lock.hcl
+!test/fixtures/plan.json

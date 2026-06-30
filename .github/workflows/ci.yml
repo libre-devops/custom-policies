@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  policies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install conftest
+        run: |
+          set -euo pipefail
+          ver="$(curl -sSfL https://api.github.com/repos/open-policy-agent/conftest/releases/latest | grep -oP '"tag_name":\s*"v\K[^"]+')"
+          echo "Installing conftest ${ver}"
+          curl -sSfL "https://github.com/open-policy-agent/conftest/releases/download/v${ver}/conftest_${ver}_Linux_x86_64.tar.gz" \
+            | sudo tar -xz -C /usr/local/bin conftest
+          conftest --version
+
+      - name: Check Rego formatting
+        run: conftest fmt --check policies
+
+      - name: Run policy unit tests
+        run: conftest verify --policy policies
